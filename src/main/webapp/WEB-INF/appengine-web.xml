@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
+  <application>logistify-rateserver</application>
+  <version>1</version>
+  <threadsafe>true</threadsafe>
+  <system-properties>
+    <property name="sun.net.client.defaultReadTimeout" value='30000' />
+    <property name="sun.net.client.defaultConnectTimeout" value='30000' />
+  </system-properties>
+</appengine-web-app>

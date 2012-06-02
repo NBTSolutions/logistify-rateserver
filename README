@@ -1,0 +1,7 @@
+Application URL: http://logistify-rateserver.appspot.com/. The servlet simply writes "hello".
+
+Run mvn clean gae:unpack to download the sdk.
+
+To build: mvn clean package
+To run locally: mvn clean package gae:start (and then mvn gae:stop)
+To deploy: mvn clean gae:deploy
