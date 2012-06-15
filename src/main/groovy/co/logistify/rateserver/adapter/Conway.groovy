@@ -8,10 +8,19 @@ import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.ContentType
 
 public class Conway implements Adapter {
+    def termsMap = [
+        'PP' : 'P',
+        'CC' : 'C',
+        'TP' : null
+    ]
+    def classMap = [
+        '77.5'  : '775',
+        '77'    : '775'
+    ]
 
     @Override
     public Rate getRate(Request r) {
-        return parseXmlResponse(requestRate(r))
+        parseXmlResponse(requestRate(r))
     }
 
     String requestRate(Request r) {
@@ -41,12 +50,12 @@ public class Conway implements Adapter {
             OriginZip(country : getCountryCode(r.fromZip), r.fromZip)
             DestinationZip(country : getCountryCode(r.toZip), r.toZip)
             if (r.acct != null) CustNmbr(r.acct)
-            ChargeCode(getTerms(r.terms))
+            ChargeCode(mapTerms(r.terms))
             EffectiveDate(r.date)
 
             r.freight.each { final item ->
                 Item() {
-                    CmdtyClass(convertClass(item.cls))
+                    CmdtyClass(mapClass(item.cls))
                     Weight(unit: 'lbs', item.weight)
                 }
             }
@@ -55,26 +64,19 @@ public class Conway implements Adapter {
         writer.toString()
     }
 
-    String getTerms(String terms) {
-        def map = [
-            'PP' : 'P',
-            'CC' : 'C',
-            'TP' : null
-        ]
-        terms in map.keySet() ? map[terms] : terms
+    String mapTerms(String terms) {
+        terms in termsMap.keySet() ? map[terms] : terms
     }
 
-    String convertClass(String cls) {
-        def map = [
-            '77.5'  : '775',
-            '77'    : '775'
-        ]
-        cls in map.keySet() ? map[cls] : cls
+    String mapClass(String cls) {
+        cls in classMap.keySet() ? map[cls] : cls
     }
 
     static String getCountryCode(String zip) {
-        if (zip =~ /^[ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1} *\d{1}[A-Z]{1}\d{1}$/) return 'CN'
-        if (zip =~ /^\d{5}(-\d{4})?$/) return 'US'
+        if (zip =~ /^[ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1} *\d{1}[A-Z]{1}\d{1}$/)
+            'CN'
+        if (zip =~ /^\d{5}(-\d{4})?$/)
+            'US'
     }
 }
 

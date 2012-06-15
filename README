@@ -8,7 +8,7 @@ To run locally: mvn clean package gae:start (and then mvn gae:stop)
 To deploy: mvn clean gae:deploy
 
 Example query: 
-http://logistify-rateserver.appspot.com/?r={"fromZip":"23188","scac":"CNWY","terms":"PP","login":"logistify1","acct":null,"pass":"pass123","date":"06/14/12","freight":[{"cls":"50","weight":"1000"},{"cls":"77","weight":"2000"}],"toZip":"24060"}
+http://api.logistify.co/?r={"fromZip":"23188","scac":"CNWY","terms":"PP","login":"logistify1","acct":null,"pass":"pass123","date":"06/14/12","freight":[{"cls":"50","weight":"1000"},{"cls":"77","weight":"2000"}],"toZip":"24060"}
 
 Example response:
 {

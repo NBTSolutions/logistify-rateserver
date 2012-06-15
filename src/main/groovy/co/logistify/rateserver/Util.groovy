@@ -14,9 +14,9 @@ abstract class Util {
      * Return true if the argument is 'empty' or null, and false otherwise.
      */
     static boolean nullOrEmpty(def o) {
-        if (o instanceof List) return o?.size() == 0
-        if (o instanceof String) return o?.length() == 0
-        else return o == null
+        if (o instanceof List) o?.size() == 0
+        if (o instanceof String) o?.length() == 0
+        else o == null
     }
 
     static String httpPost(String urlString, String key, String value, String user, String pass) {
@@ -55,15 +55,15 @@ abstract class Util {
      * @param password Password
      */
     public static void setBasicAuth(HttpURLConnection connection,
-                String username, String password) {
+            String username, String password) {
         StringBuilder buf = new StringBuilder(username)
         buf.append(':')
         buf.append(password)
         byte[] bytes = null
         try {
-                bytes = buf.toString().getBytes("ISO-8859-1")
+            bytes = buf.toString().getBytes("ISO-8859-1")
         } catch (java.io.UnsupportedEncodingException uee) {
-                assert false
+            assert false
         }
 
         String header = "Basic " + Base64.encodeBase64String(bytes)
