@@ -5,6 +5,7 @@ import co.logistify.rateserver.Request
 
 public class Estes implements Adapter {
 
+    @Override
     public Rate getRate(Request r) {
         String uri = buildUri(r)
 

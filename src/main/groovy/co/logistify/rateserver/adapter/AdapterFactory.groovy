@@ -1,9 +1,11 @@
 package co.logistify.rateserver.adapter
 
 class AdapterFactory {
-    static final def map = [:]
+    static def map = [
+        'CNWY'  : Conway.class
+    ]
 
-    public Adapter getAdapter(String scac) {
-        return map[scac].newInstance();
+    static Adapter getAdapter(String scac) {
+        return map[scac].newInstance()
     }
 }

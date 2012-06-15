@@ -2,24 +2,22 @@ package co.logistify.rateserver
 
 import groovy.util.GroovyTestCase
 
-class RateServerTest extends GroovyTestCase {
+class ServletTest extends GroovyTestCase {
 
     void testValidateRequest() {
         def request = new Request([
             fromZip : '23188',
             toZip   : '24060',
-            classes : [
-                '50', '75'
-            ],
-            weights : [
-                1000, 2000
+            freight : [
+                new Freight([ cls: '50', weight: '1000' ]),
+                new Freight([ cls: '77', weight: '2000' ])
             ],
             scac    : 'CNWY'
         ])
         // convert from object to json string
         String requestStr = new groovy.json.JsonBuilder(request).toString()
 
-        def rateServer = new RateServer()
+        def rateServer = new Servlet()
 
         Request r = rateServer.validateAndConvertRequest(requestStr)
 
@@ -31,17 +29,17 @@ class RateServerTest extends GroovyTestCase {
         def b = [ ]
         def c = null
 
-        assert !RateServer.nullOrEmpty(a)
-        assert RateServer.nullOrEmpty(b)
-        assert RateServer.nullOrEmpty(c)
+        assert !Util.nullOrEmpty(a)
+        assert Util.nullOrEmpty(b)
+        assert Util.nullOrEmpty(c)
 
         def d = ''
         def e = null
         def f = 'f'
 
-        assert RateServer.nullOrEmpty(d)
-        assert RateServer.nullOrEmpty(e)
-        assert !RateServer.nullOrEmpty(f)
+        assert Util.nullOrEmpty(d)
+        assert Util.nullOrEmpty(e)
+        assert !Util.nullOrEmpty(f)
     }
 }
 

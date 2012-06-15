@@ -7,7 +7,7 @@
   <display-name>Logistify Rate Server</display-name>
   <servlet>
     <servlet-name>RateServer</servlet-name>
-    <servlet-class>co.logistify.rateserver.RateServer</servlet-class>
+    <servlet-class>co.logistify.rateserver.Servlet</servlet-class>
   </servlet>
 
   <servlet-mapping>

@@ -10,28 +10,24 @@ class RateJsonTest extends GroovyTestCase {
     void testGroovyToJson() {
         def rate = new Rate([
             netCharge   : 50,
-            grossCharge : 100,
-            note        : 'hello',
-            lineItems   : [ new LineItem([
-                description : 'nothing',
-                grossCharge : 10,
-                netCharge   : 20
-            ]) ]
+            note        : 'OK'
         ])
-        assert new groovy.json.JsonBuilder(rate).toString() == '{"note":"hello","lineItems":[{"description":"nothing","netCharge":20.0,"grossCharge":10.0}],"netCharge":50.0,"grossCharge":100.0}'
+        assert new groovy.json.JsonBuilder(rate).toString() == '{"note":"OK","netCharge":50.0}'
     }
 
     void testJsonToGroovy() {
         def request = new Request([
+            date    : new Date().format('MM/dd/yy'),
             fromZip : '23188',
             toZip   : '24060',
-            classes : [
-                '50', '75'
+            terms   : 'PP',
+            freight : [
+                new Freight([ cls: '50', weight: '1000' ]),
+                new Freight([ cls: '77', weight: '2000' ])
             ],
-            weights : [
-                1000, 2000
-            ],
-            scac    : 'CNWY'
+            scac    : 'CNWY',
+            login   : 'logistify1',
+            pass    : 'pass123'
         ])
         // convert from object to json string
         String requestStr = new groovy.json.JsonBuilder(request).toString()
@@ -41,11 +37,6 @@ class RateJsonTest extends GroovyTestCase {
 
         assert r.fromZip == '23188'
         assert r.toZip == '24060'
-        assert r.classes == [ '50', '75' ]
-        assert r.weights == [ 1000, 2000 ]
-        assert r.login == null
-        assert r.pass == null
-        assert r.acct == null
         assert r.scac == 'CNWY'
 
         assert new groovy.json.JsonBuilder(r).toString() == requestStr
