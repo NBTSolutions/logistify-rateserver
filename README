@@ -1,4 +1,5 @@
-Application URL: http://logistify-rateserver.appspot.com/
+AppEngine URL: http://logistify-rateserver.appspot.com/
+Public URL: http://api.logistify.co
 
 Run mvn clean gae:unpack to download the sdk.
 
