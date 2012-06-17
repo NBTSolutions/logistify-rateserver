@@ -1,7 +1,7 @@
 package co.logistify.rateserver.adapter
 
 class AdapterFactory {
-    private static def map = [
+    static def map = [
         CNWY : Conway.class,
     ]
 

@@ -7,16 +7,18 @@ import groovy.xml.MarkupBuilder
 import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.ContentType
 
-public class Conway implements Adapter {
-    def termsMap = [
-        'PP' : 'P',
-        'CC' : 'C',
-        'TP' : null
-    ]
-    def classMap = [
-        '77.5'  : '775',
-        '77'    : '775'
-    ]
+public class Conway extends Adapter {
+    static {
+        setTermsMap([
+            'PP' : 'P',
+            'CC' : 'C',
+        ])
+        setClassMap([
+            '77.5'  : '775',
+            '77'    : '775'
+        ])
+        setAccessorialMap(new HashMap())
+    }
 
     @Override
     public Rate getRate(Request r) {
@@ -42,7 +44,6 @@ public class Conway implements Adapter {
     }
 
     String buildRequestBody(Request r) {
-
         def writer = new StringWriter()
         def xml = new MarkupBuilder(writer)
 
@@ -59,24 +60,17 @@ public class Conway implements Adapter {
                     Weight(unit: 'lbs', item.weight)
                 }
             }
+            r.accessorials.each{ final acc -> 
+                Accessorial(acc)
+            }
         }
-
         writer.toString()
     }
 
-    String mapTerms(String terms) {
-        terms in termsMap.keySet() ? map[terms] : terms
-    }
-
-    String mapClass(String cls) {
-        cls in classMap.keySet() ? map[cls] : cls
-    }
-
     static String getCountryCode(String zip) {
-        if (zip =~ /^[ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1} *\d{1}[A-Z]{1}\d{1}$/)
-            'CN'
-        if (zip =~ /^\d{5}(-\d{4})?$/)
-            'US'
+        if (Util.isAmericanZip(zip)) 'US'
+        else if (Util.isCanadianZip(zip)) 'CN'
+        else throw new Exception("error parsing zip code $zip")
     }
 }
 

@@ -14,9 +14,12 @@ abstract class Util {
      * Return true if the argument is 'empty' or null, and false otherwise.
      */
     static boolean nullOrEmpty(def o) {
-        if (o instanceof List) o?.size() == 0
-        if (o instanceof String) o?.length() == 0
-        else o == null
+        if (o instanceof List) 
+            o?.size() == 0
+        else if (o instanceof String)
+            o?.length() == 0
+        else
+            o == null
     }
 
     static String httpPost(String urlString, String key, String value, String user, String pass) {
@@ -48,6 +51,13 @@ abstract class Util {
         }
     }
 
+    public static boolean isCanadianZip(String zip) {
+        return zip =~ /^[ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1} *\d{1}[A-Z]{1}\d{1}$/
+    }
+    public static boolean isAmericanZip(String zip) {
+        return zip =~ /^\d{5}(-\d{4})?$/
+    }
+
     /**
      * Preemptively set the Authorization header to use Basic Auth.
      * @param connection The HTTP connection
@@ -69,4 +79,22 @@ abstract class Util {
         String header = "Basic " + Base64.encodeBase64String(bytes)
         connection.setRequestProperty("Authorization", header)
     }
+
+    static final def supportedAccessorials = [
+        'PED' : 'Destination exhibition sites delivery',
+        'PEO' : 'Origin exhibition sites pickup',
+        'ELS' : 'Excessive length',
+        'ZHM' : 'Hazardous Materials',
+        'OIP' : 'Inside pickup',
+        'DID' : 'Inside delivery',
+        'DLG' : 'Lift gate service',
+        'RSD' : 'Destination residential delivery',
+        'RSO' : 'Origin residential pickup',
+        'OSS' : 'Origin sort and segregate',
+        'SRT' : 'Destination sort and segregate',
+    ]
+    static final String[] supportedClasses = [
+        '50', '55', '60', '65', '70', '77', '77.5', '85', '92', '92.5',
+        '100', '110', '125', '150', '175', '200', '250', '300', '400', '500'
+    ]
 }
