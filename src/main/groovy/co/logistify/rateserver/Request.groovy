@@ -33,7 +33,7 @@ class Request {
         freight.each { it.validate() }
 
         accessorials.each { acc ->
-            if (!(acc in Util.supportedAccessorials.keySet()))
+            if (!(acc.toUpperCase() in Util.supportedAccessorials.keySet()))
                 throw new Exception("The Accessorial '$acc' is not curently supported")
         }
 

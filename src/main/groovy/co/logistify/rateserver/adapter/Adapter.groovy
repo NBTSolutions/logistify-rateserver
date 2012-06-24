@@ -4,9 +4,9 @@ import co.logistify.rateserver.Request
 import co.logistify.rateserver.Rate
 
 public abstract class Adapter {
-    static def termsMap
-    static def classMap
-    static def accessorialMap
+    def termsMap
+    def classMap
+    def accessorialMap
 
     /**
      * Call from servlet to request and parse a rate.
@@ -16,14 +16,14 @@ public abstract class Adapter {
     abstract Rate getRate(Request r)
 
     String mapTerms(String terms) {
-        terms in termsMap.keySet() ? termsMap[terms] : terms
+        terms.toUpperCase() in termsMap.keySet() ? termsMap[terms] : terms.toUpperCase()
     }
 
     String mapClass(String cls) {
-        cls in classMap.keySet() ? classMap[cls] : cls
+        cls.toUpperCase() in classMap.keySet() ? classMap[cls] : cls.toUpperCase()
     }
 
     String mapAccessorial(String acc) {
-        acc in accessorialMap.keySet() ? accessorialMap[acc] : acc
+        acc.toUpperCase() in accessorialMap.keySet() ? accessorialMap[acc] : acc.toUpperCase()
     }
 }

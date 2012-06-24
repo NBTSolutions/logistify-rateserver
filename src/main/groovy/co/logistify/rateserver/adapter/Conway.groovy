@@ -1,5 +1,6 @@
 package co.logistify.rateserver.adapter
 
+import java.util.logging.Logger
 import co.logistify.rateserver.Util
 import co.logistify.rateserver.Rate
 import co.logistify.rateserver.Request
@@ -8,7 +9,9 @@ import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.ContentType
 
 public class Conway extends Adapter {
-    static {
+    static final Logger log = Logger.getLogger(Conway.class.getName())
+
+    public Conway() {
         setTermsMap([
             'PP' : 'P',
             'CC' : 'C',
@@ -17,6 +20,7 @@ public class Conway extends Adapter {
             '77.5'  : '775',
             '77'    : '775'
         ])
+        // special case since accessorial mappings are based on Conway's
         setAccessorialMap(new HashMap())
     }
 
@@ -28,8 +32,8 @@ public class Conway extends Adapter {
     String requestRate(Request r) {
         Util.httpPost(
             'https://www.con-way.com/XMLj/X-Rate',
-            'RateRequest',
-            buildRequestBody(r),
+            ['RateRequest'],
+            [buildRequestBody(r)],
             r.login,
             r.pass
         )
@@ -38,7 +42,7 @@ public class Conway extends Adapter {
     Rate parseXmlResponse(String xml) {
         def quote = new XmlParser().parseText(xml)
         new Rate([
-            note        : quote.Error?.text() ?: "OK",
+            note        : quote.Error?.text() ?: 'OK',
             netCharge   : (quote.NetCharge.text() ?: null)?.toFloat(),
         ])
     }
@@ -60,8 +64,8 @@ public class Conway extends Adapter {
                     Weight(unit: 'lbs', item.weight)
                 }
             }
-            r.accessorials.each{ final acc -> 
-                Accessorial(acc)
+            r.accessorials.each { final acc -> 
+                Accessorial(mapAccessorial(acc))
             }
         }
         writer.toString()

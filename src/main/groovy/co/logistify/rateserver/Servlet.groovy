@@ -1,17 +1,27 @@
 package co.logistify.rateserver
 
 import javax.servlet.ServletException
+import javax.servlet.ServletConfig
 import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 import co.logistify.rateserver.adapter.AdapterFactory
+import co.logistify.rateserver.test.*
 
 public class Servlet extends HttpServlet {
+
+    public void init(ServletConfig config) {
+        super.init(config)
+        Util.init();
+    }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        boolean debug = request.getParameter('debug') == 'true'
+        if (request.getParameter('test') == 'true') {
+            runTests(response.getWriter())
+            return
+        }
 
         def result = null
         Request r = null
@@ -24,6 +34,20 @@ public class Servlet extends HttpServlet {
         }
         def json = new groovy.json.JsonBuilder(result).toString()
         response.getWriter().print(json)
+    }
+
+    void runTests(def log) {
+        log.print('starting tests...<br/>')
+        TestSuite.getTests().each { test ->
+            try {
+                test.run(log)
+            }
+            catch (Exception e) {
+                log.print(e.getMessage())
+                //e.printStackTrace()
+            }
+        }
+        log.println('<br/>tests complete.')
     }
 
     /**
