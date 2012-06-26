@@ -66,6 +66,10 @@ public class PittOhio extends Adapter {
     }
 
     Rate parseXmlResponse(String xml) {
-        // TODO implement
+        def quote = new XmlParser().parseText(xml)
+        new Rate([
+            note        : quote.NUMERRORS.text() != '0' ? quote.ERROR.ERRORMESSAGE.text() : 'OK',
+            netCharge   : (quote.CHARGE.text() ?: null)?.toFloat(),
+        ])
     }
 }
