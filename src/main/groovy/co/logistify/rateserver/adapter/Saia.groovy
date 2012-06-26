@@ -63,8 +63,8 @@ public class Saia extends Adapter {
         def writer = new StringWriter()
         def xml = new MarkupBuilder(writer)
 
-        Zip to = Query.getZip(r.toZip)
         Zip from = Query.getZip(r.fromZip)
+        Zip to = Query.getZip(r.toZip)
 
         xml.Create() {
             UserID(r.login)

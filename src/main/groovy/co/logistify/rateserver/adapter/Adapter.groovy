@@ -15,15 +15,15 @@ public abstract class Adapter {
      */
     abstract Rate getRate(Request r)
 
-    String mapTerms(String terms) {
+    final String mapTerms(String terms) {
         terms.toUpperCase() in termsMap.keySet() ? termsMap[terms] : terms.toUpperCase()
     }
 
-    String mapClass(String cls) {
+    final String mapClass(String cls) {
         cls.toUpperCase() in classMap.keySet() ? classMap[cls] : cls.toUpperCase()
     }
 
-    String mapAccessorial(String acc) {
+    final String mapAccessorial(String acc) {
         acc.toUpperCase() in accessorialMap.keySet() ? accessorialMap[acc] : acc.toUpperCase()
     }
 }

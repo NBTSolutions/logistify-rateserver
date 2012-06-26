@@ -24,6 +24,10 @@ abstract class Util {
             o == null
     }
 
+	static String httpGet(String urlString) {
+		httpGet(urlString, null, null, null, null)
+	}
+
     static String httpGet(String urlString, def keys, def values,
             String user, String pass) {
         try {
@@ -32,6 +36,9 @@ abstract class Util {
                 String encodedValue = URLEncoder.encode(values[0], "UTF-8")
                 payload.append("$encodedValue")
             }
+			else if (keys == null && values == null) {
+				// do nothing
+			}
             else [ keys, values ].transpose().eachWithIndex { row, i ->
                 def key = row[0], value = row[1]
                 String encodedValue = URLEncoder.encode(value, "UTF-8")
