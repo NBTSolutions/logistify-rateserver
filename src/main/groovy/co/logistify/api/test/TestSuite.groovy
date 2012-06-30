@@ -1,4 +1,4 @@
-package co.logistify.rateserver.test
+package co.logistify.api.test
 
 class TestSuite {
     static List<Test> getTests() {

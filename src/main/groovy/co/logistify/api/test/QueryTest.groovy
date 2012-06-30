@@ -1,7 +1,7 @@
-package co.logistify.rateserver.test
+package co.logistify.api.test
 
-import co.logistify.rateserver.dao.*
-import co.logistify.rateserver.*
+import co.logistify.api.dao.*
+import co.logistify.api.*
 import com.googlecode.objectify.ObjectifyService
 
 class QueryTest implements Test {

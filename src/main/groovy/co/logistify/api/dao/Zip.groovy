@@ -1,4 +1,4 @@
-package co.logistify.rateserver.dao
+package co.logistify.api.dao
 
 import javax.persistence.Id
 

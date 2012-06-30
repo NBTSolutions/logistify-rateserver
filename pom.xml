@@ -9,10 +9,11 @@
   <url>http://maven.apache.org</url>
 
   <properties>
+    <gwtVersion>2.4.0</gwtVersion>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.6</maven.compiler.source>
     <maven.compiler.target>1.6</maven.compiler.target>
-    <gae.version>1.6.6</gae.version>
+    <gae.version>1.7.0</gae.version>
   </properties>
 
   <repositories>
@@ -20,9 +21,43 @@
       <id>objectify-appengine</id>
       <url>http://objectify-appengine.googlecode.com/svn/maven</url>
     </repository>
+    <repository>
+      <id>gwt-bootstrap</id>
+      <name>GWT-Bootstrap SNAPSHOTS</name>
+      <url>http://gwtbootstrap.github.com/maven/snapshots</url>
+    </repository>
+    <repository>  
+      <id>maven-restlet</id>  
+      <name>Public online Restlet repository</name>  
+      <url>http://maven.restlet.org</url>  
+     </repository>  
   </repositories>
 
   <dependencies>
+
+    <dependency>
+      <groupId>com.googlecode.gwt-validation</groupId>
+      <artifactId>gwt-validation</artifactId>
+      <version>2.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-user</artifactId>
+      <version>${gwtVersion}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-servlet</artifactId>
+      <version>${gwtVersion}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.gwtbootstrap</groupId>
+      <artifactId>gwt-bootstrap</artifactId>
+      <version>2.0.3.0-SNAPSHOT</version>
+    </dependency>
 
     <dependency>
         <groupId>javax.persistence</groupId>
@@ -109,6 +144,28 @@
   <build>
     <finalName>RateServer</finalName>
     <plugins>
+
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.5</version>
+        <executions>
+          <execution>
+            <phase>compile</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>target/www</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>src/main/webapp</directory>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
     	<plugin>
     		<groupId>org.apache.maven.plugins</groupId>
     		<artifactId>maven-war-plugin</artifactId>
@@ -156,20 +213,11 @@
           </dependency>
         </dependencies>
       </plugin>
-      
-      <!--
-            This plug-in "enhances" your domain model objects (i.e.
-            makes them persistent for datanucleus)
-        -->
       <plugin>
         <groupId>org.datanucleus</groupId>
         <artifactId>maven-datanucleus-plugin</artifactId>
         <version>3.0.2</version>
         <configuration>
-          <!--
-              Make sure this path contains your persistent
-              classes!
-          -->
           <fork>false</fork>
           <mappingIncludes>**/model/*.class</mappingIncludes>
           <verbose>true</verbose>
@@ -207,6 +255,29 @@
             <version>3.0.1</version>
           </dependency>
         </dependencies>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>gwt-maven-plugin</artifactId>
+        <version>2.4.0</version>
+        <!-- JS is only needed in the package phase, this speeds up testing --> 
+        <executions>
+          <execution>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <localWorkers>2</localWorkers>
+          <runTarget>rater.html</runTarget>
+          <hostedWebapp>target/www</hostedWebapp>
+          <compileReport>false</compileReport>
+          <modules>
+            <module>co.logistify.api.API</module>
+          </modules>
+        </configuration>
       </plugin>
     </plugins>
   </build>

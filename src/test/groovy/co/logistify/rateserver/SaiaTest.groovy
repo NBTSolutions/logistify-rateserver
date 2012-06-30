@@ -1,6 +1,6 @@
-package co.logistify.rateserver
+package co.logistify.api
 
-import co.logistify.rateserver.adapter.Conway
+import co.logistify.api.adapter.Conway
 import groovy.util.GroovyTestCase
 
 class SaiaTest extends GroovyTestCase {

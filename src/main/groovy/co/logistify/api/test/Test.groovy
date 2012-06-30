@@ -1,4 +1,4 @@
-package co.logistify.rateserver.test
+package co.logistify.api.test
 
 interface Test {
     void run(def log)

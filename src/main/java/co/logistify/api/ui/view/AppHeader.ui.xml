@@ -1,0 +1,19 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+    xmlns:b='urn:import:com.github.gwtbootstrap.client.ui'
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+    <b:Navbar position='TOP'>
+      <b:Container width='980px'>
+      <b:NavCollapse>
+        <b:Nav alignment='LEFT'>
+          <b:Dropdown width='181px' height='32px' text='Logistify Menu'>
+            <b:NavLink icon='HOME' href='http://logistify.co'>Website</b:NavLink>
+          </b:Dropdown>
+        </b:Nav>
+
+      </b:NavCollapse>
+      </b:Container>
+    </b:Navbar>
+    
+</ui:UiBinder>
+

@@ -1,6 +1,6 @@
-package co.logistify.rateserver
+package co.logistify.api
 
-import co.logistify.rateserver.adapter.*
+import co.logistify.api.adapter.*
 import groovy.util.GroovyTestCase
 
 class AdapterTest extends GroovyTestCase {

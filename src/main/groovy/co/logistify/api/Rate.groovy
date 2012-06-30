@@ -1,4 +1,4 @@
-package co.logistify.rateserver
+package co.logistify.api
 
 class Rate {
     Float netCharge

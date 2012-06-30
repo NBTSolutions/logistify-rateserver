@@ -1,6 +1,6 @@
-package co.logistify.rateserver
+package co.logistify.api
 
-import co.logistify.rateserver.dao.Zip
+import co.logistify.api.dao.Zip
 
 import com.google.appengine.api.urlfetch.*
 import java.util.logging.Logger

@@ -1,11 +1,11 @@
-package co.logistify.rateserver.adapter
+package co.logistify.api.adapter
 
 import java.util.logging.Logger
-import co.logistify.rateserver.dao.Query
-import co.logistify.rateserver.dao.Zip
-import co.logistify.rateserver.Util
-import co.logistify.rateserver.Rate
-import co.logistify.rateserver.Request
+import co.logistify.api.dao.Query
+import co.logistify.api.dao.Zip
+import co.logistify.api.Util
+import co.logistify.api.Rate
+import co.logistify.api.Request
 import groovy.xml.MarkupBuilder
 import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.ContentType

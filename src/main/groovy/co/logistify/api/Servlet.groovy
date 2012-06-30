@@ -1,12 +1,12 @@
-package co.logistify.rateserver
+package co.logistify.api
 
 import javax.servlet.ServletException
 import javax.servlet.ServletConfig
 import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
-import co.logistify.rateserver.adapter.AdapterFactory
-import co.logistify.rateserver.test.*
+import co.logistify.api.adapter.AdapterFactory
+import co.logistify.api.test.*
 
 public class Servlet extends HttpServlet {
 

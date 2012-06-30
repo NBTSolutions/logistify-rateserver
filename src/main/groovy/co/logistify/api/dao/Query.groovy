@@ -1,4 +1,4 @@
-package co.logistify.rateserver.dao
+package co.logistify.api.dao
 
 import com.googlecode.objectify.ObjectifyService
 import com.googlecode.objectify.Key

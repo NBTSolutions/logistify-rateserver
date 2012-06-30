@@ -1,6 +1,6 @@
-package co.logistify.rateserver
+package co.logistify.api
 
-import co.logistify.rateserver.adapter.AdapterFactory
+import co.logistify.api.adapter.AdapterFactory
 
 class Request {
     String scac

@@ -8,7 +8,7 @@
 
   <servlet>
     <servlet-name>RateServer</servlet-name>
-    <servlet-class>co.logistify.rateserver.Servlet</servlet-class>
+    <servlet-class>co.logistify.api.Servlet</servlet-class>
   </servlet>
 
   <servlet>

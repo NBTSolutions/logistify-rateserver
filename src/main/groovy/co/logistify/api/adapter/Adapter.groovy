@@ -1,7 +1,7 @@
-package co.logistify.rateserver.adapter
+package co.logistify.api.adapter
 
-import co.logistify.rateserver.Request
-import co.logistify.rateserver.Rate
+import co.logistify.api.Request
+import co.logistify.api.Rate
 
 public abstract class Adapter {
     def termsMap
