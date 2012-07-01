@@ -8,6 +8,6 @@ public class API implements EntryPoint {
     @Override
     public void onModuleLoad() {
         RootPanel.get().add(new AppHeader());
-        RootPanel.get("container").add(new RateForm());
+        RootPanel.get().add(new RateForm());
     }
 }
