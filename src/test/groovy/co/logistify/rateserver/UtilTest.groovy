@@ -3,9 +3,28 @@ package co.logistify.api
 import groovy.util.GroovyTestCase
 
 /**
- * Tests to help me better understand some new Groovy concepts.
+ * Test the methods in Util
  */
 class UtilTest extends GroovyTestCase {
+
+    /**
+     * Tests:
+     *  Util.isCanadianZip
+     *  Util.isAmericanZip
+     */
+    void testZipCountryDetection() {
+        String usZip = '23188'
+        String caZip = 'A0E2Z0'
+        String noZip = '3jxij59'
+
+        assert Util.isAmericanZip(usZip)
+        assert !Util.isAmericanZip(caZip)
+        assert !Util.isAmericanZip(noZip)
+
+        assert Util.isCanadianZip(caZip)
+        assert !Util.isCanadianZip(usZip)
+        assert !Util.isCanadianZip(noZip)
+    }
 
     /**
      * Test parallel iteration using transpose()

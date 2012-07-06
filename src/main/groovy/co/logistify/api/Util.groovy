@@ -119,10 +119,10 @@ abstract class Util {
     }
 
     public static boolean isCanadianZip(String zip) {
-        return zip =~ /^[ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1} *\d{1}[A-Z]{1}\d{1}$/
+        return co.logistify.api.shared.Util.isCanadianZip(zip);
     }
     public static boolean isAmericanZip(String zip) {
-        return zip =~ /^\d{5}(-\d{4})?$/
+        return co.logistify.api.shared.Util.isAmericanZip(zip);
     }
 
     /**

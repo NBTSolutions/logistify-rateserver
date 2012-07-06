@@ -1,0 +1,30 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'
+    xmlns:b='urn:import:com.github.gwtbootstrap.client.ui'
+    xmlns:b2='urn:import:com.github.gwtbootstrap.client.ui.base'
+    xmlns:l='urn:import:co.logistify.api.ui.widget'
+    xmlns:date='urn:import:com.github.gwtbootstrap.datepicker.client.ui'>
+
+  <b:Controls>
+
+    <b:ListBox ui:field='accField'>
+      <g:item>None</g:item>
+      <g:item value='ZHM'>Hazardous</g:item>
+      <g:item value='ELS'>Excessive Length</g:item>
+      <g:item value='OIP'>Inside Pickup</g:item>
+      <g:item value='PED'>Exhibition Site Delivery</g:item>
+      <g:item value='PEO'>Exhibition Site Pickup</g:item>
+      <g:item value='DLG'>Lift Gate Service</g:item>
+      <g:item value='RSD'>Residential Delivery</g:item>
+      <g:item value='RSO'>Residential Pickup</g:item>
+      <g:item value='OSS'>Origin Sort/Segregate</g:item>
+      <g:item value='SRT'>Destination Sort/Segregate</g:item>
+    </b:ListBox>
+
+    <b:HelpBlock ui:field='accPrompt' visible='false'>
+      <b:Button ui:field='addBtn' icon='PLUS' size='MINI' text='Add Another Accessorial' />
+    </b:HelpBlock>
+
+  </b:Controls>
+
+</ui:UiBinder>

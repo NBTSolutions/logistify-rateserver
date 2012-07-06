@@ -1,79 +1,123 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
     xmlns:g='urn:import:com.google.gwt.user.client.ui'
-    xmlns:b='urn:import:com.github.gwtbootstrap.client.ui'>
+    xmlns:b='urn:import:com.github.gwtbootstrap.client.ui'
+    xmlns:b2='urn:import:com.github.gwtbootstrap.client.ui.base'
+    xmlns:l='urn:import:co.logistify.api.ui.widget'
+    xmlns:date='urn:import:com.github.gwtbootstrap.datepicker.client.ui'>
 
+  <g:VerticalPanel horizontalAlignment='CENTER' width='100%'>
+    <g:HorizontalPanel width='940px'>
 
-  <g:VerticalPanel horizontalAlignment='LEFT'>
-    <b:Form type='HORIZONTAL'>
-      <g:VerticalPanel horizontalAlignment='LEFT'>
+      <b:Form type='HORIZONTAL' width='470px'>
+        <g:VerticalPanel horizontalAlignment='LEFT'>
+          <b:Legend>LTL Rate Quote Form</b:Legend>
 
-        <b:Nav>
-          <b:NavHeader ui:field='header' >Carrier Info</b:NavHeader>
-        </b:Nav>
+          <b:Nav>
+            <b:NavHeader ui:field='header'>Carrier Info</b:NavHeader>
+          </b:Nav>
 
-        <b:Fieldset ui:field='fieldSet'>
+          <b:Fieldset ui:field='fieldSet'>
 
-          <b:ControlGroup ui:field='scacControl'>
-            <b:ControlLabel>Carrier SCAC</b:ControlLabel>
-            <b:Controls>
-              <b:TextBox ui:field='scac' />
-            </b:Controls>
-          </b:ControlGroup>
+            <b:ControlGroup ui:field='carrierControl'>
+              <b:ControlLabel>Carrier</b:ControlLabel>
+              <b:Controls>
+                <b:ValueListBox ui:field='scac'/>
+              </b:Controls>
+            </b:ControlGroup>
 
-          <b:ControlGroup ui:field='userControl'>
-            <b:ControlLabel>Username</b:ControlLabel>
-            <b:Controls>
-              <b:TextBox ui:field='user' />
-            </b:Controls>
-          </b:ControlGroup>
+            <b:ControlGroup ui:field='loginControl'>
+              <b:ControlLabel>Username</b:ControlLabel>
+              <b:Controls>
+                <b:TextBox ui:field='login' />
+              </b:Controls>
+            </b:ControlGroup>
 
-          <b:ControlGroup ui:field='passwordControl'>
-            <b:ControlLabel>Password</b:ControlLabel>
-            <b:Controls>
-              <b:PasswordTextBox ui:field='pass' />
-            </b:Controls>
-          </b:ControlGroup>
+            <b:ControlGroup ui:field='passwordControl'>
+              <b:ControlLabel>Password</b:ControlLabel>
+              <b:Controls>
+                <b:PasswordTextBox ui:field='pass' />
+              </b:Controls>
+            </b:ControlGroup>
 
-          <b:ControlGroup ui:field='acctControl'>
-            <b:ControlLabel>Account #</b:ControlLabel>
-            <b:Controls>
-              <b:PasswordTextBox ui:field='acct' />
-            </b:Controls>
-          </b:ControlGroup>
+            <b:ControlGroup ui:field='acctControl'>
+              <b:ControlLabel>Account #</b:ControlLabel>
+              <b:Controls>
+                <b:TextBox ui:field='acct' />
+              </b:Controls>
+            </b:ControlGroup>
 
-        </b:Fieldset>
+          </b:Fieldset>
+          <b:Nav>
+            <b:NavHeader>Shipment Info</b:NavHeader>
+          </b:Nav>
+
+          <b:Fieldset>
+
+            <b:ControlGroup ui:field='dateControl'>
+              <b:ControlLabel>Effective Date</b:ControlLabel>
+              <b:Controls>
+                <date:DateBox ui:field='date' />
+              </b:Controls>
+            </b:ControlGroup>
+
+            <b:ControlGroup ui:field='termsControl'>
+              <b:ControlLabel>Billing Terms</b:ControlLabel>
+              <b:Controls>
+                <b:ValueListBox ui:field='terms'/>
+              </b:Controls>
+            </b:ControlGroup>
+
+            <b:ControlGroup ui:field='fromControl'>
+              <b:ControlLabel>Origin Zip</b:ControlLabel>
+              <b:Controls>
+                <b:TextBox ui:field='fromZip' />
+                <b:HelpInline ui:field='fromCaption' />
+              </b:Controls>
+            </b:ControlGroup>
+
+            <b:ControlGroup ui:field='toControl'>
+              <b:ControlLabel>Destination Zip</b:ControlLabel>
+              <b:Controls>
+                <b:TextBox ui:field='toZip' />
+                <b:HelpInline ui:field='toCaption' />
+              </b:Controls>
+            </b:ControlGroup>
+
+            <b:ControlGroup ui:field='freightControl'>
+              <b:ControlLabel>Freight LineItems</b:ControlLabel>
+              <l:LineItemForm />
+            </b:ControlGroup>
+
+            <b:ControlGroup ui:field='accControl'>
+              <b:ControlLabel>Accessorials</b:ControlLabel>
+              <l:AccessorialField />
+            </b:ControlGroup>
+
+          </b:Fieldset>
+        </g:VerticalPanel>
+
+        <b:FormActions ui:field='formActions'>
+          <b:Button text='Get Rate!' type='PRIMARY' />
+        </b:FormActions>
+      
+      </b:Form>
+
+      <g:VerticalPanel horizontalAlignment='LEFT' width='470px'>
+        <b:Legend>JSON Request</b:Legend>
+        <b:CodeBlock ui:field='requestJson'>
+          {\n
+            k : 'v'\n
+          }
+        </b:CodeBlock>
+        <b:Legend>JSON Response</b:Legend>
+        <b:CodeBlock ui:field='responseJson'>
+          {\n
+            netCharge : 804.15\n
+          }
+        </b:CodeBlock>
       </g:VerticalPanel>
-    </b:Form>
 
-    <b:Form type='HORIZONTAL'>
-      <g:VerticalPanel horizontalAlignment='LEFT'>
-
-        <b:Nav>
-          <b:NavHeader>Shipment Info</b:NavHeader>
-        </b:Nav>
-
-        <b:Fieldset>
-
-          <b:ControlGroup ui:field='fromControl'>
-            <b:ControlLabel>Origin Zip</b:ControlLabel>
-            <b:Controls>
-              <b:TextBox ui:field='fromZip' />
-            </b:Controls>
-          </b:ControlGroup>
-
-          <b:ControlGroup ui:field='toControl'>
-            <b:ControlLabel>Destination Zip</b:ControlLabel>
-            <b:Controls>
-              <b:TextBox ui:field='toZip' />
-            </b:Controls>
-          </b:ControlGroup>
-
-        </b:Fieldset>
-
-      </g:VerticalPanel>
-    
-    </b:Form>
-
+    </g:HorizontalPanel>
   </g:VerticalPanel>
     
 </ui:UiBinder>

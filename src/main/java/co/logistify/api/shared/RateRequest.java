@@ -2,16 +2,26 @@ package co.logistify.api.shared;
 
 import java.util.*;
 
-public class RateRequest {
-    public String scac;
-    public String fromZip;
-    public String toZip;
-    public List<String> freight;
-    public String terms;
-    public String date;
-    public List<String> accessorials;
+public interface RateRequest {
+    String getScac();
+    String getFromZip();
+    String getToZip();
+    List<FreightItem> getFreight();
+    String getTerms();
+    Date getDate();
+    List<String> getAccessorials();
+    String getLogin();
+    String getPass();
+    String getAcct();
 
-    public String login;
-    public String pass;
-    public String acct;
+    void setScac(String scac);
+    void setFromZip(String fromZip);
+    void setToZip(String toZip);
+    void setFreight(List<String> freight);
+    void setTerms(String terms);
+    void setDate(Date date);
+    void setAccessorials(List<String> accessorials);
+    void setLogin(String login);
+    void setPass(String pass);
+    void setAcct(String acct);
 }
