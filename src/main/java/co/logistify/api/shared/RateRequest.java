@@ -8,7 +8,7 @@ public interface RateRequest {
     String getToZip();
     List<FreightItem> getFreight();
     String getTerms();
-    Date getDate();
+    String getDate();
     List<String> getAccessorials();
     String getLogin();
     String getPass();
@@ -17,9 +17,9 @@ public interface RateRequest {
     void setScac(String scac);
     void setFromZip(String fromZip);
     void setToZip(String toZip);
-    void setFreight(List<String> freight);
+    void setFreight(List<FreightItem> freight);
     void setTerms(String terms);
-    void setDate(Date date);
+    void setDate(String date);
     void setAccessorials(List<String> accessorials);
     void setLogin(String login);
     void setPass(String pass);

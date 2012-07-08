@@ -6,7 +6,7 @@
     xmlns:date='urn:import:com.github.gwtbootstrap.datepicker.client.ui'>
 
   <b:Controls>
-
+    
     <b:ListBox ui:field='accField'>
       <g:item>None</g:item>
       <g:item value='ZHM'>Hazardous</g:item>
@@ -21,7 +21,7 @@
       <g:item value='SRT'>Destination Sort/Segregate</g:item>
     </b:ListBox>
 
-    <b:HelpBlock ui:field='accPrompt' visible='false'>
+    <b:HelpBlock ui:field='accPrompt'>
       <b:Button ui:field='addBtn' icon='PLUS' size='MINI' text='Add Another Accessorial' />
     </b:HelpBlock>
 

@@ -8,6 +8,7 @@
   <b:Form type='INLINE'>
     <b:ControlGroup>
       <b:Controls>
+
         <b:ListBox ui:field='cls' alternateSize='SMALL'>
           <g:item>Class</g:item>
           <g:item>50</g:item>
@@ -29,12 +30,13 @@
           <g:item>400</g:item>
           <g:item>500</g:item>
         </b:ListBox>
+
         <b:InputAddOn appendText='lbs'>
           <b:IntegerBox ui:field='weight' alternateSize='SMALL' />
         </b:InputAddOn>
         <b:HelpInline ui:field='freightCaption' />
         <b:HelpBlock ui:field='freightPrompt'>
-          <b:Button ui:field='addBtn' icon='PLUS' size='MINI' text='Add Another Freight Item' />
+          <b:Button ui:field='addBtn' icon='PLUS' size='MINI' text='Add Another Freight Item' tabIndex='-1'/>
         </b:HelpBlock>
       </b:Controls>
     </b:ControlGroup>

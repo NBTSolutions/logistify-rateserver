@@ -1,7 +1,9 @@
 package co.logistify.api.ui.widget;
 
+import java.util.*;
 import co.logistify.api.shared.*;
 import co.logistify.api.ui.*;
+import co.logistify.api.ui.view.*;
 import com.google.gwt.editor.client.*;
 import com.google.gwt.event.dom.client.*;
 import com.github.gwtbootstrap.client.ui.*;
@@ -24,11 +26,23 @@ public class AccessorialField extends Composite {
         accPrompt.setVisible(false);
     }
 
-    public ListBox getField() {
-        return accField;
+    public String getValue() {
+        return accField.getValue();
     }
-    public Button getAddButton() {
-        return addBtn;
+
+    public void bind(final RateForm form) {
+        accField.addChangeHandler(new ChangeHandler() {
+            @Override
+            public void onChange(ChangeEvent e) {
+                form.updateRequestJson();
+            }
+        });
+        addBtn.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent e) {
+                form.addAccessorial();
+            }
+        });
     }
 
     @UiTemplate("AccessorialField.ui.xml")

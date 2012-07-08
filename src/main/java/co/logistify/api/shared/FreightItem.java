@@ -2,8 +2,8 @@ package co.logistify.api.shared;
 
 public interface FreightItem {
     String getCls();
-    int getWeight();
+    Integer getWeight();
 
     void setCls(String cls);
-    void setWeight(int weight);
+    void setWeight(Integer weight);
 }

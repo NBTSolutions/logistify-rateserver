@@ -21,7 +21,7 @@
             <b:ControlGroup ui:field='carrierControl'>
               <b:ControlLabel>Carrier</b:ControlLabel>
               <b:Controls>
-                <b:ValueListBox ui:field='scac'/>
+                <l:EditorListBox ui:field='scac'/>
               </b:Controls>
             </b:ControlGroup>
 
@@ -56,14 +56,14 @@
             <b:ControlGroup ui:field='dateControl'>
               <b:ControlLabel>Effective Date</b:ControlLabel>
               <b:Controls>
-                <date:DateBox ui:field='date' />
+                <date:DateBox ui:field='date' autoClose='true'/>
               </b:Controls>
             </b:ControlGroup>
 
             <b:ControlGroup ui:field='termsControl'>
               <b:ControlLabel>Billing Terms</b:ControlLabel>
               <b:Controls>
-                <b:ValueListBox ui:field='terms'/>
+                <l:EditorListBox ui:field='terms'/>
               </b:Controls>
             </b:ControlGroup>
 
@@ -85,12 +85,10 @@
 
             <b:ControlGroup ui:field='freightControl'>
               <b:ControlLabel>Freight LineItems</b:ControlLabel>
-              <l:LineItemForm />
             </b:ControlGroup>
 
             <b:ControlGroup ui:field='accControl'>
               <b:ControlLabel>Accessorials</b:ControlLabel>
-              <l:AccessorialField />
             </b:ControlGroup>
 
           </b:Fieldset>
@@ -104,17 +102,9 @@
 
       <g:VerticalPanel horizontalAlignment='LEFT' width='470px'>
         <b:Legend>JSON Request</b:Legend>
-        <b:CodeBlock ui:field='requestJson'>
-          {\n
-            k : 'v'\n
-          }
-        </b:CodeBlock>
+        <b:CodeBlock ui:field='requestJson'>{ }</b:CodeBlock>
         <b:Legend>JSON Response</b:Legend>
-        <b:CodeBlock ui:field='responseJson'>
-          {\n
-            netCharge : 804.15\n
-          }
-        </b:CodeBlock>
+        <b:CodeBlock ui:field='responseJson'>{ }</b:CodeBlock>
       </g:VerticalPanel>
 
     </g:HorizontalPanel>
