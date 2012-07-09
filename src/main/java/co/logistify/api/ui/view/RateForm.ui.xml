@@ -95,16 +95,22 @@
         </g:VerticalPanel>
 
         <b:FormActions ui:field='formActions'>
-          <b:Button text='Get Rate!' type='PRIMARY' />
+          <b:Button text='Get Rate!' type='PRIMARY' ui:field='getRateBtn'/>
         </b:FormActions>
       
       </b:Form>
 
       <g:VerticalPanel horizontalAlignment='LEFT' width='470px'>
         <b:Legend>JSON Request</b:Legend>
-        <b:CodeBlock ui:field='requestJson'>{ }</b:CodeBlock>
+        <b:Nav ui:field='requestJsonNote'>
+          <b:NavHeader>Fill out the form to generate the request</b:NavHeader>
+        </b:Nav>
+        <b:CodeBlock visible='false' ui:field='requestJson'>{ }</b:CodeBlock>
         <b:Legend>JSON Response</b:Legend>
-        <b:CodeBlock ui:field='responseJson'>{ }</b:CodeBlock>
+        <b:Nav ui:field='responseJsonNote'>
+          <b:NavHeader>Fill out the form and click "Get Rate!" to see the response</b:NavHeader>
+        </b:Nav>
+        <b:CodeBlock visible='false' ui:field='responseJson'>{ }</b:CodeBlock>
       </g:VerticalPanel>
 
     </g:HorizontalPanel>

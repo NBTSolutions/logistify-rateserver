@@ -1,6 +1,8 @@
 package co.logistify.api.ui.view;
 
 import java.util.*;
+import javax.validation.*;
+import javax.validation.groups.Default;
 import co.logistify.api.shared.*;
 import co.logistify.api.ui.*;
 import co.logistify.api.ui.widget.*;
@@ -66,6 +68,9 @@ public class RateForm extends Composite implements Editor<RateRequest> {
     @UiField @Ignore CodeBlock responseJson;
     @UiField @Ignore ControlGroup freightControl;
     @UiField @Ignore ControlGroup accControl;
+    @UiField @Ignore Nav requestJsonNote;
+    @UiField @Ignore Nav responseJsonNote;
+    @UiField @Ignore Button getRateBtn;
 
     List<AccessorialField> accessorials;
     List<LineItemForm> freight;
@@ -154,6 +159,17 @@ public class RateForm extends Composite implements Editor<RateRequest> {
         updateRequestJson();
     }
 
+    @UiHandler("getRateBtn")
+    void onGetRateClick(ClickEvent e) {
+        responseJsonNote.setVisible(false);
+        responseJson.setVisible(true);
+
+        String json = updateRequestJson();
+
+        // TODO make request
+        JsonService.requestRate(json, this);
+    }
+
     public void bind() {
         scac.addValueChangeHandler(new ValueChangeHandler() {
             @Override
@@ -170,7 +186,6 @@ public class RateForm extends Composite implements Editor<RateRequest> {
 
         addLineItem();
         addAccessorial();
-        updateRequestJson();
     }
 
     public void addAccessorial() {
@@ -218,19 +233,38 @@ public class RateForm extends Composite implements Editor<RateRequest> {
         r.setDate(date.getOriginalValue());
     }
 
-    public void updateRequestJson() {
+    public RateRequest getObject() {
         RateRequest r = (RateRequest)driver.flush();
         flushDate(r);
         flushLineItemData(r);
         flushAccessorialData(r);
-        String json = AutoBeanCodex.encode(AutoBeanUtils.getAutoBean(r)).getPayload();
 
+        return r;
+    }
+
+    public String updateRequestJson() {
+        requestJsonNote.setVisible(false);
+        requestJson.setVisible(true);
+
+        String json = AutoBeanCodex.encode(AutoBeanUtils.getAutoBean(getObject())).getPayload();
+
+        // this remove/add process is a workaround to this bug:
+        // https://github.com/gwtbootstrap/gwt-bootstrap/issues/181
         VerticalPanel p = (VerticalPanel)requestJson.getParent();
         int index = p.getWidgetIndex(requestJson);
         requestJson.removeFromParent();
         requestJson = new CodeBlock(prettify(json));
         p.insert(requestJson, index);
-        //requestJson.setText(prettify(json));
+
+        return json;
+    }
+
+    public void updateResponseJson(String json) {
+        VerticalPanel p = (VerticalPanel)responseJson.getParent();
+        int index = p.getWidgetIndex(responseJson);
+        responseJson.removeFromParent();
+        responseJson = new CodeBlock(prettify(json));
+        p.insert(responseJson, index);
     }
 
     private native String prettify(String json) /*-{
